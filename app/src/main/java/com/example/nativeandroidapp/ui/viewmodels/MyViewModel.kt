@@ -19,4 +19,10 @@ class MyViewModel @Inject constructor(private val useCase : MyUseCaseClass) : Vi
         val data = useCase.fetchUserDataFromRemote()
         dataFlow.emit(data)
     }
+
+    fun fetchUserDataFromLocal() = viewModelScope.launch {
+        val data = useCase.fetchUserDataFromLocalDB()
+        dataFlow.emit(data)
+    }
+
 }

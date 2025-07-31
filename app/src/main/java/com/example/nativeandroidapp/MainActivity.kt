@@ -9,6 +9,8 @@ import com.example.nativeandroidapp.domain.model.Response
 import com.example.nativeandroidapp.ui.adapters.PostsAdapter
 import com.example.nativeandroidapp.ui.viewmodels.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,8 +28,24 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             myViewModel.dataFlow.collect { it ->
+
+                delay(500L)
                 setupPostAdapter(it)
             }
+        }
+
+        binding?.btnGoTopOffline?.setOnClickListener{
+
+            if (binding?.btnGoTopOffline?.text == "GET DATA FROM LOCAL DB"){
+                binding?.btnGoTopOffline?.text = "GET DATA FROM API"
+                myViewModel.fetchUserDataFromLocal()
+
+            }else{
+                binding?.btnGoTopOffline?.text = "GET DATA FROM LOCAL DB"
+                myViewModel.fetchUserData()
+            }
+
+            setupPostAdapter(ArrayList())
         }
 
         myViewModel.fetchUserData()

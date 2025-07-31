@@ -1,6 +1,6 @@
 package com.example.nativeandroidapp.domain.usecases
 
-import com.example.nativeandroidapp.data.repo.MyRepository
+import com.example.nativeandroidapp.domain.repo.MyRepository
 import com.example.nativeandroidapp.domain.model.Response
 import io.mockk.coEvery
 import io.mockk.coVerify
